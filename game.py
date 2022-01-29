@@ -1,6 +1,6 @@
 import random
 
-from typing import List, Optional, Iterable
+from typing import List, Optional, Iterable, Tuple
 from typing_extensions import Self
 
 from numpy import append
@@ -17,7 +17,7 @@ class Game:
         # game state
         self.TIC = model.TIC
         self.TAC = model.TAC
-        
+
 
         self.TIC_WIN = 1
         self.TAC_WIN = -1
@@ -77,7 +77,7 @@ class Game:
         print(''.join(s))
 
 
-    def _state_horizontals(self, state: List[int]) -> tuple[tuple[int]]:
+    def _state_horizontals(self, state: List[int]) -> Tuple[Tuple[int]]:
         """..."""
         return (
             state[:3],
@@ -85,7 +85,7 @@ class Game:
             state[6:9],
         )
 
-    def _state_verticals(self, state: List[int]) -> tuple[tuple[int]]:
+    def _state_verticals(self, state: List[int]) -> Tuple[Tuple[int]]:
         """..."""
         return (
             (state[0], state[3], state[6]),
@@ -93,14 +93,14 @@ class Game:
             (state[2], state[5], state[8]),
         )
 
-    def _state_diagonals(self, state) -> tuple[tuple[int]]:
+    def _state_diagonals(self, state) -> Tuple[Tuple[int]]:
         """..."""
         return (
             (state[0], state[4], state[8]),
             (state[2], state[4], state[6]),
         )
 
-    def _main_states(self) -> tuple[tuple[int]]:
+    def _main_states(self) -> Tuple[Tuple[int]]:
         """..."""
         _states = self._state_horizontals(self._board)
         _states += self._state_verticals(self._board)
@@ -129,7 +129,7 @@ class Game:
 
     def run(self) -> None:
         self._init_board()
-        
+
         self._print_board()
         while True:
             game_progress = self._board_state()

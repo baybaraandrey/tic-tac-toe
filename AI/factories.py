@@ -1,5 +1,5 @@
 from itertools import permutations
-from typing import Dict, Iterable, List
+from typing import Dict, Iterable, List, Tuple
 
 import numpy as np
 
@@ -58,7 +58,7 @@ class QFactory:
         self.states = states
         return self
 
-    def create(self) -> Dict[tuple[int], np.array]:
+    def create(self) -> Dict[Tuple[int], np.array]:
         """..."""
         q = {}
         for state in self.states:

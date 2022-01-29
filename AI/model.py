@@ -90,9 +90,9 @@ class QModel:
                 m = val
         return idx
 
-    def next_random_action_state(self, state: tuple[int], turn: int) -> Tuple[int, tuple[int]]:
+    def next_random_action_state(self, state: Tuple[int], turn: int) -> Tuple[int, Tuple[int]]:
         """..."""
-        available_actions = self._rewards._get_available_action_idxs(state)            
+        available_actions = self._rewards._get_available_action_idxs(state)
         next_action = np.random.choice(available_actions)
         next_state = self._get_next_state_from_actions(state, next_action, turn)
         return next_action, next_state
@@ -108,7 +108,7 @@ class QModel:
         states = self._ai_turn_states()
         for _ in tqdm(range(epoch)):
             current_state = random.choice(states)
-            
+
             next_action, next_state = self.next_random_action_state(current_state, self.TIC)
 
             available_computer_actions = self._rewards._get_available_action_idxs(next_state)
@@ -123,7 +123,7 @@ class QModel:
 
 
 
-    def predict(self, state: tuple[int]) -> Tuple[int, tuple[int]]:
+    def predict(self, state: Tuple[int]) -> Tuple[int, Tuple[int]]:
         """predicts the best hint."""
         available_actions = self._rewards._get_available_action_idxs(state)
         best_action = self._best_available_action(self._Q[tuple(state)], available_actions)

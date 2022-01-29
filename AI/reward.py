@@ -1,5 +1,5 @@
 import copy
-from typing import Iterable, List, Optional, Dict
+from typing import Iterable, List, Optional, Dict, Tuple
 
 import numpy as np
 
@@ -26,7 +26,7 @@ class Reward:
         self._action_list_length = action_list_length
         self._reward_table = None
 
-    def _state_horizontals(self, state: List[int]) -> tuple[tuple[int]]:
+    def _state_horizontals(self, state: List[int]) -> Tuple[Tuple[int]]:
         """..."""
         return (
             state[:3],
@@ -34,7 +34,7 @@ class Reward:
             state[6:9],
         )
 
-    def _state_verticals(self, state: List[int]) -> tuple[tuple[int]]:
+    def _state_verticals(self, state: List[int]) -> Tuple[Tuple[int]]:
         """..."""
         return (
             (state[0], state[3], state[6]),
@@ -42,14 +42,14 @@ class Reward:
             (state[2], state[5], state[8]),
         )
 
-    def _state_diagonals(self, state) -> tuple[tuple[int]]:
+    def _state_diagonals(self, state) -> Tuple[Tuple[int]]:
         """..."""
         return (
             (state[0], state[4], state[8]),
             (state[2], state[4], state[6]),
         )
 
-    def _main_states(self, state: List[int]) -> tuple[tuple[int]]:
+    def _main_states(self, state: List[int]) -> Tuple[Tuple[int]]:
         """..."""
         _states = self._state_horizontals(state)
         _states += self._state_verticals(state)
@@ -75,7 +75,7 @@ class Reward:
                 return self._win_reward
             if self.is_win_row_for(self._tac, sub_state):
                 return self._lose_reward
-        
+
         return self._common_reward
 
 
@@ -83,7 +83,7 @@ class Reward:
         """..."""
         state_copy = copy.deepcopy(list(state))
         actions = np.zeros((self._action_list_length,))
-        
+
         for action_idx in self._get_available_action_idxs(state):
             if state_copy[action_idx] in [self._tic, self._tac]:
                 continue
@@ -92,16 +92,16 @@ class Reward:
             state_copy[action_idx] = self._tic
 
             actions[action_idx] = self._get_reward_from_current_state(state_copy)
-            
+
             state_copy[action_idx] = prev_state_val
-            
+
         return actions
 
     def from_states(self, states: List[int]):
         self.states = states
         return self
 
-    
+
     def build(self):
         """..."""
         rewards = {}
