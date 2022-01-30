@@ -2,6 +2,9 @@
 
 Model training was based on superb simple Q-learning algorithm
 
+
+https://github.com/baybaraandrey/tic-tac-toe/blob/main/tic-tac-toe3.gif
+
 ## Windows Users
 ```powershell
 python -m venv env
