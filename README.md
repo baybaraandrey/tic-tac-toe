@@ -3,7 +3,7 @@
 Model training was based on superb simple Q-learning algorithm
 
 
-https://github.com/baybaraandrey/tic-tac-toe/blob/main/tic-tac-toe3.gif
+![sample round](https://github.com/baybaraandrey/tic-tac-toe/blob/main/tic-tac-toe3.gif?raw=true)
 
 ## Windows Users
 ```powershell
